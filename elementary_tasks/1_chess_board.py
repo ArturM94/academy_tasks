@@ -1,5 +1,5 @@
 class ChessBoard:
-    def __init__(self,  h, w):
+    def __init__(self, h, w):
         self.height = h
         self.width = w
 
