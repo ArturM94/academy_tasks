@@ -1,77 +1,83 @@
 from math import sqrt
-from collections import OrderedDict
+from collections import Counter
 
 
 class Triangles:
     def __init__(self):
-        # Ввод данных
         self.triangle = input('Input triangles data in format: <name>, '
                               '<side length>, <side length>, <side length>.\n'
                               'Data must satisfy next conditions:\n'
                               'a < b + c\n'
                               'b < a + c\n'
                               'c < a + b\n')
-        self.validation()
 
     def validation(self):
         # Проверка на валидность вводимых данных
-
-        # Разбиение треугольника на список
+        # Если данные валидны, возвращаются имя и стороны треугольника,
+        # иначе вызывает init и метод валидации
         triangle = list(self.triangle.split(', '))
-        # Распределение списка в переменные
         name = triangle[0].lower()
         a = float(triangle[1])
         b = float(triangle[2])
         c = float(triangle[3])
         if a < (b + c) and b < (a + c) and c < (a + b):
-            self.area_calculation(name, a, b, c)
+            return name, a, b, c
         else:
             print('Invalid data. The non-existent triangle. Try again.')
             self.__init__()
+            self.validation()
 
-    def area_calculation(self, name, a, b, c):
+    @staticmethod
+    def area_calculation(name, a, b, c):
         # Расчет площади треугольника
+        # Возвращает площадь по формуле Герона
         sp = (a+b+c) / 2.0  # semi perimeter
         area = round(sqrt(sp * (sp-a) * (sp-b) * (sp-c)), 2)
-        triangle = {name: str(area)}
-        self.recording_data(triangle)
+        triangle = {name: area}
+        return triangle
 
-    def recording_data(self, triangle):
-        # Запись треугольников в словарь
-        triangles_dict = {}
-        triangles_dict.update(triangle)
-        print(triangles_dict)
-        self.do_continue(triangles_dict)
-        # TODO: Реализовать рабочий метод дозаписи данных в словарь
-
-    def do_continue(self, triangles_dict):
-        # Если пользователь ответил утвердительно, вызывается инициализатор,
-        # иначе программа завершается с выводом соответвующего уведомления
+    @staticmethod
+    def do_continue():
+        # Если пользователь ответил утвердительно, возвращается True,
+        # иначе возвращается False
         print('Add another triangle? [y / yes]')
         answer = str(input())
         if (answer.lower() == 'y') or (answer.lower() == 'yes'):
-            self.__init__()
+            return True
         else:
-            # TODO: Не забыть вызвать метод сортировки вместо вывода данных
-            # self.sorting(triangles_dict)
-            self.print_out_data(triangles_dict)
+            return False
 
-    # def sorting(self, triangles_dict):
-    #     # TODO: Реализовать метод сортировки словаря по значению
-    #     # sorted(triangles_dict.items(), key=lambda x: x[1], reverse=True)
-    #     OrderedDict(sorted(triangles_dict.items(), key=lambda t: t[1]))
-    #     print(triangles_dict)
-    #     self.print_out_data(triangles_dict)
+    @staticmethod
+    def sorting(triangles_dict):
+        # Сортирует словарь по значению в порядке убывания площади
+        # Возвращает отсортированный словарь
+        triangles_dict = Counter(triangles_dict)
+        triangles_dict = triangles_dict.most_common()
+        triangles_dict = dict(triangles_dict)
+        return triangles_dict
 
-    def print_out_data(self, triangles_dict):
+    @staticmethod
+    def print_out_data(sorted_dict):
+        # Выводит данные в консоль
         print('============= Triangles list: ===============')
-        for i, key in enumerate(triangles_dict, 1):
-            print(f'{i}. [Triangle {key}]: {triangles_dict[key]} cm')
+        for i, key in enumerate(sorted_dict, 1):
+            print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm')
 
 
 def main():
-    # Точка входа вызывает класс Envelopes
-    Triangles()
+    triangles_dict = dict()
+    triangles = Triangles()
+    while True:
+        name, a, b, c = triangles.validation()
+        triangle = triangles.area_calculation(name, a, b, c)
+        triangles_dict.update(triangle)
+        go_on = triangles.do_continue()
+        if go_on is True:
+            triangles.__init__()
+        elif go_on is False:
+            sorted_dict = triangles.sorting(triangles_dict)
+            triangles.print_out_data(sorted_dict)
+            break
 
 
 if __name__ == '__main__':
