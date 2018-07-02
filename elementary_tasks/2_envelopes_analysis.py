@@ -42,8 +42,7 @@ class Envelopes:
 
 
 def main():
-    # Точка входа вызывает класс Envelopes
-    return Envelopes()
+    Envelopes()
 
 
 if __name__ == '__main__':
