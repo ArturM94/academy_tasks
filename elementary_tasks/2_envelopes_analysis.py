@@ -1,48 +1,62 @@
 import sys
 
 
-class Envelopes:
-    def __init__(self):
-        print('Введите поочередно размеры двух конвертов (a, b) и (c, d):')
+class Envelope:
+    def __init__(self, a, b, c, d):
         # От пользователя принимаются параметры конвертов,
         # вызывается функция определения вхождения конверта
-        self.a = float(input())
-        self.b = float(input())
-        self.c = float(input())
-        self.d = float(input())
-        self.envelope_entry(self.a, self.b, self.c, self.d)
+        self.side_a = a
+        self.side_b = b
+        self.side_c = c
+        self.side_d = d
 
-    def envelope_entry(self, a, b, c, d):
+        instance_id = id(Envelope)
+        print(f'Instance id: {instance_id}\n')
+
+    def envelope_entry(self):
         # Сравниваются стороны конвертов,
         # вызывается функция проверки результата
-        entry_result = (a < d) and (c < b)
-        self.check_result(entry_result)
-
-    def check_result(self, entry_result):
-        # Если второй конверт входит в первый, выводится утвердительный
-        # ответ, иначе выводится отрицательный, после чего вызывается
-        # функция на запрос продолжения выполнения программы
-        if entry_result is True:
-            print('Второй конверт можно вложить в первый.')
-            self.do_continue()
+        if (self.side_a > self.side_c) and (self.side_b > self.side_d):
+            print('The second envelope can be nested in the first.\n')
+        elif (self.side_a < self.side_c) and (self.side_b < self.side_d):
+            print('The first envelope can be nested in the second.\n')
         else:
-            print('Второй конверт нельзя вложить в первый.')
-            self.do_continue()
+            print('None of the envelopes can be nested in another.\n')
 
-    def do_continue(self):
+    @staticmethod
+    def do_continue():
         # Если пользователь ответил утвердительно, вызывается инициализатор,
         # иначе программа завершается с выводом соответвующего уведомления
-        print('Хотите продолжить? [y / yes]')
+        print('Do you want to continue? [y / yes]')
         answer = str(input())
         if (answer.lower() == 'y') or (answer.lower() == 'yes'):
-            self.__init__()
+            return True
         else:
-            print('Работа с программой завершена.')
+            print('The program is completed.')
             sys.exit()
 
 
 def main():
-    Envelopes()
+    while True:
+        try:
+            print('Enter the sizes of two envelopes (a, b) and (c, d).')
+            a = float(input('Side a:\n'))
+            b = float(input('Side b:\n'))
+            c = float(input('Side c:\n'))
+            d = float(input('Side d:\n'))
+            if a < 0 or b < 0 or c < 0 or d < 0:
+                raise ValueError
+            envelope = Envelope(a, b, c, d)
+            envelope.envelope_entry()
+            is_continue = envelope.do_continue()
+            if is_continue:
+                continue
+            else:
+                break
+        except ValueError:
+            print('Invalid value. Entries must contain numbers greater than '
+                  'zero.\n')
+            continue
 
 
 if __name__ == '__main__':
