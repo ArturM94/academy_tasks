@@ -1,6 +1,6 @@
 class WordNumber:
-    def __init__(self):
-        self.n = input()
+    def __init__(self, digit_number):
+        self.digit_number = digit_number
         self.ZERO = 'ноль'
         self.ONES = {
             0: '',
@@ -135,29 +135,41 @@ class WordNumber:
             word.append(word_ones)
             word = ' '.join(word)
             return word
+        else:
+            raise ValueError
         # TODO: Для чисел 1,000 - 999,999
-        elif length == 4:
-            key_thousands = int(list_number[0])
-            key_hundreds = int(list_number[1])
-            key_tens = int(list_number[2])
-            key_ones = int(list_number[3])
-            word_thousands = self.THOUSANDS[key_thousands]
-            word_hundreds = self.HUNDREDS[key_hundreds]
-            word_tens = self.TENS[key_tens]
-            word_ones = self.ONES[key_ones]
-            word = list()
-            word.append(word_thousands)
-            word.append(word_hundreds)
-            word.append(word_tens)
-            word.append(word_ones)
-            word = ' '.join(word)
-            return word
+        # elif length == 4:
+        #     key_thousands = int(list_number[0])
+        #     key_hundreds = int(list_number[1])
+        #     key_tens = int(list_number[2])
+        #     key_ones = int(list_number[3])
+        #     word_thousands = self.THOUSANDS[key_thousands]
+        #     word_hundreds = self.HUNDREDS[key_hundreds]
+        #     word_tens = self.TENS[key_tens]
+        #     word_ones = self.ONES[key_ones]
+        #     word = list()
+        #     word.append(word_thousands)
+        #     word.append(word_hundreds)
+        #     word.append(word_tens)
+        #     word.append(word_ones)
+        #     word = ' '.join(word)
+        #     return word
 
 
 def main():
-    number = WordNumber()
-    word = number.number_to_word()
-    print(word)
+    while True:
+        try:
+            digit_number = input('Enter the number:\n')
+            if not digit_number:
+                print('NUMBER TO WORD\n'
+                      '1. Number must be positive.\n'
+                      '2. Number must be from 0 to 999.\n')
+                continue
+            word_number = WordNumber(digit_number)
+            word = word_number.number_to_word()
+            print(word)
+        except ValueError:
+            print('Entry must contain only positive number from 0 to 999.\n')
 
 
 if __name__ == '__main__':
