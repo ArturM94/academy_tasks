@@ -21,16 +21,16 @@ class Triangle:
         triangle_area = {self.name: area}
         return triangle_area
 
-    @staticmethod
-    def do_continue():
-        # Если пользователь ответил утвердительно, возвращается True,
-        # иначе возвращается False
-        print('Add another triangle? [y / yes]')
-        answer = str(input())
-        if (answer.lower() == 'y') or (answer.lower() == 'yes'):
-            return True
-        else:
-            return False
+
+def do_continue():
+    # Если пользователь ответил утвердительно, возвращается True,
+    # иначе возвращается False
+    print('Add another triangle? [y / yes]')
+    answer = str(input())
+    if (answer.lower() == 'y') or (answer.lower() == 'yes'):
+        return True
+    else:
+        return False
 
 
 def sorting(triangles_dict):
@@ -87,7 +87,7 @@ def main():
         triangle = Triangle(name, side_a, side_b, side_c)
         triangle_area = triangle.area_calculation()
         triangles_dict.update(triangle_area)
-        is_continue = triangle.do_continue()
+        is_continue = do_continue()
 
         if is_continue:
             continue
