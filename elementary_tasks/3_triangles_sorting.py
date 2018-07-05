@@ -1,5 +1,4 @@
 from math import sqrt
-from collections import Counter
 
 
 class Triangle:
@@ -33,21 +32,6 @@ def do_continue():
         return False
 
 
-def sorting(triangles_dict):
-    # Сортирует словарь по значению в порядке убывания площади
-    # Возвращает отсортированный словарь
-    triangles_dict = Counter(triangles_dict).most_common()
-    triangles_dict = dict(triangles_dict)
-    return triangles_dict
-
-
-def print_out_data(sorted_dict):
-    # Выводит данные в консоль
-    print('============= Triangles list: ===============')
-    for i, key in enumerate(sorted_dict, 1):
-        print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm')
-
-
 def validation(triangle):
     # Проверка на валидность вводимых данных
     triangle = list(triangle.split(', '))
@@ -60,6 +44,22 @@ def validation(triangle):
         return name, side_a, side_b, side_c
     else:
         return False
+
+
+def sorting(triangles_dict):
+    # Сортирует словарь по значению в порядке убывания площади
+    # Возвращает отсортированный словарь
+    triangles_dict = sorted(triangles_dict.items(), key=lambda item: item[1],
+                            reverse=True)
+    triangles_dict = dict(triangles_dict)
+    return triangles_dict
+
+
+def print_out_data(sorted_dict):
+    # Выводит данные в консоль
+    print('============= Triangles list: ===============')
+    for i, key in enumerate(sorted_dict, 1):
+        print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm')
 
 
 def main():
