@@ -64,7 +64,8 @@ def validation(triangle):
 
 def main():
     triangles_dict = dict()
-    while True:
+    is_continue = True
+    while is_continue:
         triangle = input('Enter triangle data:\n')
         # Если параметры отсутвуют,
         # вызывается инструкция по использованию
@@ -88,11 +89,6 @@ def main():
         triangle_area = triangle.area_calculation()
         triangles_dict.update(triangle_area)
         is_continue = do_continue()
-
-        if is_continue:
-            continue
-        else:
-            break
 
     sorted_dict = sorting(triangles_dict)
     print_out_data(sorted_dict)
