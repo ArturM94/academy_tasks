@@ -38,14 +38,18 @@ class Envelope:
 
 def main():
     while True:
-        try:
             print('Enter the sizes of two envelopes (a, b) and (c, d).')
-            a = float(input('Side a:\n'))
-            b = float(input('Side b:\n'))
-            c = float(input('Side c:\n'))
-            d = float(input('Side d:\n'))
-            if a < 0 or b < 0 or c < 0 or d < 0:
-                raise ValueError
+            try:
+                a = float(input('Side a:\n'))
+                b = float(input('Side b:\n'))
+                c = float(input('Side c:\n'))
+                d = float(input('Side d:\n'))
+                if a < 0 or b < 0 or c < 0 or d < 0:
+                    raise ValueError
+            except ValueError:
+                print('Invalid value. Entries must contain numbers greater '
+                      'than zero.\n')
+                continue
             envelope = Envelope(a, b, c, d)
             envelope.envelope_entry()
             is_continue = envelope.do_continue()
@@ -53,10 +57,6 @@ def main():
                 continue
             else:
                 break
-        except ValueError:
-            print('Invalid value. Entries must contain numbers greater than '
-                  'zero.\n')
-            continue
 
 
 if __name__ == '__main__':
