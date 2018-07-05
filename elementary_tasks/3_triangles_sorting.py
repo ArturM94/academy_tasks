@@ -48,63 +48,53 @@ class Triangle:
             print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm')
 
 
-def validation(a, b, c):
+def validation(triangle):
     # Проверка на валидность вводимых данных
-    if a < (b + c) and b < (a + c) and c < (a + b):
-        return True
-    else:
-        return False
-
-
-def split(triangle):
-    # Разделяет входящую строку на составляющие
-    # треугольника: имя и стороны
     triangle = list(triangle.split(', '))
     name = triangle[0].lower()
     side_a = float(triangle[1])
     side_b = float(triangle[2])
     side_c = float(triangle[3])
-    return name, side_a, side_b, side_c
+    if side_a < (side_b + side_c) and side_b < (side_a + side_c) and \
+            side_c < (side_a + side_b):
+        return name, side_a, side_b, side_c
+    else:
+        return False
 
 
 def main():
     triangles_dict = dict()
     while True:
+        triangle = input('Enter triangle data:\n')
+        # Если параметры отсутвуют,
+        # вызывается инструкция по использованию
+        if not triangle:
+            print('1. Enter triangle data in format: <name>, '
+                  '<side length>, <side length>, <side length>.\n'
+                  '2. Data must satisfy next conditions:\n'
+                  'a < b + c\n'
+                  'b < a + c\n'
+                  'c < a + b\n')
+            continue
+
         try:
-            triangle = input('Enter triangle data:\n')
-            # Если параметры отсутвуют,
-            # вызывается инструкция по использованию
-            if not triangle:
-                print('1. Enter triangle data in format: <name>, '
-                      '<side length>, <side length>, <side length>.\n'
-                      '2. Data must satisfy next conditions:\n'
-                      'a < b + c\n'
-                      'b < a + c\n'
-                      'c < a + b\n')
-                continue
-
-            name, side_a, side_b, side_c = split(triangle)
-            is_valid = validation(side_a, side_b, side_c)
-
-            if is_valid:
-                triangle = Triangle(name, side_a, side_b, side_c)
-                triangle_area = triangle.area_calculation()
-                triangles_dict.update(triangle_area)
-                is_continue = triangle.do_continue()
-
-                if is_continue:
-                    continue
-                else:
-                    sorted_dict = triangle.sorting(triangles_dict)
-                    triangle.print_out_data(sorted_dict)
-                    break
-            else:
-                print('Invalid data. The non-existent triangle.\n')
-                continue
-        except (ValueError, IndexError):
+            name, side_a, side_b, side_c = validation(triangle)
+        except (ValueError, IndexError, TypeError):
             print('Invalid data. Entry must contain 4 values. <side length> '
                   'must contain only numbers.\n')
             continue
+
+        triangle = Triangle(name, side_a, side_b, side_c)
+        triangle_area = triangle.area_calculation()
+        triangles_dict.update(triangle_area)
+        is_continue = triangle.do_continue()
+
+        if is_continue:
+            continue
+        else:
+            sorted_dict = triangle.sorting(triangles_dict)
+            triangle.print_out_data(sorted_dict)
+            break
 
 
 if __name__ == '__main__':
