@@ -1,5 +1,7 @@
 from math import sqrt
 
+from elementary_tasks.do_continue import do_continue
+
 
 class Triangle:
     def __init__(self, name, side_a, side_b, side_c):
@@ -19,17 +21,6 @@ class Triangle:
                           (sp - self.side_c)), 2)
         triangle_area = {self.name: area}
         return triangle_area
-
-
-def do_continue():
-    # Если пользователь ответил утвердительно, возвращается True,
-    # иначе возвращается False
-    print('Add another triangle? [y / yes]')
-    answer = str(input())
-    if (answer.lower() == 'y') or (answer.lower() == 'yes'):
-        return True
-    else:
-        return False
 
 
 def validation(triangle):

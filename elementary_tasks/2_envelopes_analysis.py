@@ -1,3 +1,6 @@
+from elementary_tasks.do_continue import do_continue
+
+
 class Envelope:
     def __init__(self, a, b, c, d):
         # От пользователя принимаются параметры конвертов,
@@ -19,17 +22,6 @@ class Envelope:
             print('The first envelope can be nested in the second.\n')
         else:
             print('None of the envelopes can be nested in another.\n')
-
-
-def do_continue():
-    # Если пользователь ответил утвердительно, вызывается инициализатор,
-    # иначе программа завершается с выводом соответвующего уведомления
-    print('Do you want to continue? [y / yes]')
-    answer = str(input())
-    if (answer.lower() == 'y') or (answer.lower() == 'yes'):
-        return True
-    else:
-        return False
 
 
 def main():
