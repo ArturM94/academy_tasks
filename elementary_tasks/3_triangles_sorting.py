@@ -32,20 +32,20 @@ class Triangle:
         else:
             return False
 
-    @staticmethod
-    def sorting(triangles_dict):
-        # Сортирует словарь по значению в порядке убывания площади
-        # Возвращает отсортированный словарь
-        triangles_dict = Counter(triangles_dict).most_common()
-        triangles_dict = dict(triangles_dict)
-        return triangles_dict
 
-    @staticmethod
-    def print_out_data(sorted_dict):
-        # Выводит данные в консоль
-        print('============= Triangles list: ===============')
-        for i, key in enumerate(sorted_dict, 1):
-            print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm')
+def sorting(triangles_dict):
+    # Сортирует словарь по значению в порядке убывания площади
+    # Возвращает отсортированный словарь
+    triangles_dict = Counter(triangles_dict).most_common()
+    triangles_dict = dict(triangles_dict)
+    return triangles_dict
+
+
+def print_out_data(sorted_dict):
+    # Выводит данные в консоль
+    print('============= Triangles list: ===============')
+    for i, key in enumerate(sorted_dict, 1):
+        print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm')
 
 
 def validation(triangle):
@@ -92,9 +92,10 @@ def main():
         if is_continue:
             continue
         else:
-            sorted_dict = triangle.sorting(triangles_dict)
-            triangle.print_out_data(sorted_dict)
             break
+
+    sorted_dict = sorting(triangles_dict)
+    print_out_data(sorted_dict)
 
 
 if __name__ == '__main__':
