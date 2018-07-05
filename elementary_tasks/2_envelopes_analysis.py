@@ -33,7 +33,7 @@ def main():
                 side_b = float(input('Side b:\n'))
                 side_c = float(input('Side c:\n'))
                 side_d = float(input('Side d:\n'))
-                if side_a < 0 or side_b < 0 or side_c < 0 or side_d < 0:
+                if side_a < 1 or side_b < 1 or side_c < 1 or side_d < 1:
                     raise ValueError
             except ValueError:
                 print('Invalid value. Entries must contain numbers greater '
