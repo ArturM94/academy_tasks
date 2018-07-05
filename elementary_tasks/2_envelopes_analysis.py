@@ -1,6 +1,3 @@
-import sys
-
-
 class Envelope:
     def __init__(self, a, b, c, d):
         # От пользователя принимаются параметры конвертов,
@@ -32,12 +29,12 @@ class Envelope:
         if (answer.lower() == 'y') or (answer.lower() == 'yes'):
             return True
         else:
-            print('The program is completed.')
-            sys.exit()
+            return False
 
 
 def main():
-    while True:
+    is_continue = True
+    while is_continue:
             print('Enter the sizes of two envelopes (a, b) and (c, d).')
             try:
                 a = float(input('Side a:\n'))
@@ -53,10 +50,8 @@ def main():
             envelope = Envelope(a, b, c, d)
             envelope.envelope_entry()
             is_continue = envelope.do_continue()
-            if is_continue:
-                continue
-            else:
-                break
+
+    print('The program is completed.')
 
 
 if __name__ == '__main__':
