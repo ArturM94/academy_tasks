@@ -20,16 +20,16 @@ class Envelope:
         else:
             print('None of the envelopes can be nested in another.\n')
 
-    @staticmethod
-    def do_continue():
-        # Если пользователь ответил утвердительно, вызывается инициализатор,
-        # иначе программа завершается с выводом соответвующего уведомления
-        print('Do you want to continue? [y / yes]')
-        answer = str(input())
-        if (answer.lower() == 'y') or (answer.lower() == 'yes'):
-            return True
-        else:
-            return False
+
+def do_continue():
+    # Если пользователь ответил утвердительно, вызывается инициализатор,
+    # иначе программа завершается с выводом соответвующего уведомления
+    print('Do you want to continue? [y / yes]')
+    answer = str(input())
+    if (answer.lower() == 'y') or (answer.lower() == 'yes'):
+        return True
+    else:
+        return False
 
 
 def main():
@@ -49,7 +49,7 @@ def main():
                 continue
             envelope = Envelope(a, b, c, d)
             envelope.envelope_entry()
-            is_continue = envelope.do_continue()
+            is_continue = do_continue()
 
     print('The program is completed.')
 
