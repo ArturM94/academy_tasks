@@ -5,20 +5,20 @@ class ChessBoard:
 
     def row_generation(self):
         # Генерация строк шахматной доски.
-        # Строка состоит из четного количества пар клеток
-        # звездочка-пробел '* ' или пробел-звездочка ' *',
+        # Строка состоит из четного количества пар
+        # белых и черных квадратов '■□' или '□■',
         # если сама ширина имеет четное значение.
         # Генерация происходит для нечетных и четных строк.
         half_width = self.width // 2
         if self.width % 2 == 0:
-            row_odd = '* ' * half_width
-            row_even = ' *' * half_width
+            row_odd = '■□' * half_width
+            row_even = '□■' * half_width
             return row_odd, row_even
         # Если ширина имеет нечетное значение, то к уже известному
-        # сценарию необходимо добавить либо звездочку '*', либо пробел ' '.
+        # сценарию необходимо добавить белый '■', либо черный '□' квадрат.
         else:
-            row_odd = '* ' * half_width + '*'
-            row_even = ' *' * half_width + ' '
+            row_odd = '■□' * half_width + '■'
+            row_even = '□■' * half_width + '□'
             return row_odd, row_even
 
     def print_board(self, row_odd, row_even):
