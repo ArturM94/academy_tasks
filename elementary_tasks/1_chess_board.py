@@ -21,22 +21,23 @@ class ChessBoard:
             row_even = '□■' * half_width + '□'
             return row_odd, row_even
 
-    def print_board(self, row_odd, row_even):
-        # Вывод доски в консоль.
-        # Вывод производится парой нечетной и четной строки.
-        half_height = self.height // 2
-        if self.height % 2 == 0:
-            for i in range(half_height):
+
+def print_board(row_odd, row_even):
+    # Вывод доски в консоль.
+    # Вывод производится парой нечетной и четной строки.
+    half_height = height // 2
+    if height % 2 == 0:
+        for i in range(half_height):
+            print(row_odd)
+            print(row_even)
+    # Если количество строк нечетное, то дополнительно
+    # на последней итерации выводится нечетная строка.
+    else:
+        for i in range(half_height):
+            print(row_odd)
+            print(row_even)
+            if i == half_height - 1:
                 print(row_odd)
-                print(row_even)
-        # Если количество строк нечетное, то дополнительно
-        # на последней итерации выводится нечетная строка.
-        else:
-            for i in range(half_height):
-                print(row_odd)
-                print(row_even)
-                if i == half_height - 1:
-                    print(row_odd)
 
 
 print('Введите поочередно высоту и ширину: ')
@@ -44,4 +45,4 @@ height = int(input())
 width = int(input())
 chess_board = ChessBoard(height, width)
 r_odd, r_even = chess_board.row_generation()
-chess_board.print_board(r_odd, r_even)
+print_board(r_odd, r_even)
