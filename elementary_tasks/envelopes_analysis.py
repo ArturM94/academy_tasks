@@ -41,7 +41,8 @@ def main():
                 continue
             envelope = Envelope(side_a, side_b, side_c, side_d)
             envelope.envelope_entry()
-            is_continue = do_continue()
+            answer = str(input('Do you want to continue? [y / yes]\n'))
+            is_continue = do_continue(answer)
 
     print('The program is completed.')
 

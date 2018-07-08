@@ -79,7 +79,8 @@ def main():
         triangle = Triangle(name, side_a, side_b, side_c)
         triangle_area = triangle.area_calculation()
         triangles_dict.update(triangle_area)
-        is_continue = do_continue()
+        answer = str(input('Do you want to continue? [y / yes]\n'))
+        is_continue = do_continue(answer)
 
     sorted_dict = sorting(triangles_dict)
     print_out_data(sorted_dict)
