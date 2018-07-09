@@ -5,17 +5,25 @@ from elementary_tasks.do_continue import do_continue
 
 class Triangle:
     def __init__(self, name, side_a, side_b, side_c):
+        """Initialisation method
+
+        :param name: -- Name of triangle
+        :param side_a: -- Side a of triangle
+        :param side_b: -- Side b of triangle
+        :param side_c: -- Side c of triangle
+        """
         self.name = name
         self.side_a = side_a
         self.side_b = side_b
         self.side_c = side_c
 
-        instance_id = id(Triangle)
-        print(f'Instance id: {instance_id}\n')
-
     def area_calculation(self):
-        # Расчет площади треугольника
-        # Возвращает площадь по формуле Герона
+        """Calculating the area of triangle
+
+        Method returns the area by Heron's formula
+
+        :return: triangle_area
+        """
         sp = (self.side_a + self.side_b + self.side_c) / 2.0  # semi perimeter
         area = round(sqrt(sp * (sp - self.side_a) * (sp - self.side_b) *
                           (sp - self.side_c)), 2)
@@ -24,12 +32,17 @@ class Triangle:
 
 
 def validation(triangle):
-    # Проверка на валидность вводимых данных
+    """Validation of input data
+
+    :param triangle:
+    :return: valid data of False
+    """
     triangle = list(triangle.split(', '))
     name = triangle[0].lower()
     side_a = float(triangle[1])
     side_b = float(triangle[2])
     side_c = float(triangle[3])
+
     if side_a < (side_b + side_c) and side_b < (side_a + side_c) and \
             side_c < (side_a + side_b):
         return name, side_a, side_b, side_c
@@ -38,8 +51,13 @@ def validation(triangle):
 
 
 def sorting(triangles_dict):
-    # Сортирует словарь по значению в порядке убывания площади
-    # Возвращает отсортированный словарь
+    """Sorts the dictionary
+
+    Sorts by value in order of decreasing area
+
+    :param triangles_dict: -- Collection of triangles
+    :return: triangles_dict -- Sorted triangles
+    """
     triangles_dict = sorted(triangles_dict.items(), key=lambda item: item[1],
                             reverse=True)
     triangles_dict = dict(triangles_dict)
@@ -47,19 +65,25 @@ def sorting(triangles_dict):
 
 
 def print_out_data(sorted_dict):
+    """Prints data in console
+
+    :param sorted_dict: -- Sorted triangles
+    :return: -- Strings with triangle and its area
+    """
     # Выводит данные в консоль
     print('============= Triangles list: ===============')
     for i, key in enumerate(sorted_dict, 1):
-        print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm')
+        print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm²')
 
 
 def main():
     triangles_dict = dict()
     is_continue = True
+
     while is_continue:
         triangle = input('Enter triangle data:\n')
-        # Если параметры отсутвуют,
-        # вызывается инструкция по использованию
+        # The instruction for using the program is called
+        # if 'triangle' have no parameters
         if not triangle:
             print('1. Enter triangle data in format: <name>, '
                   '<side length>, <side length>, <side length>.\n'
