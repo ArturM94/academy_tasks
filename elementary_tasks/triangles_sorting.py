@@ -31,11 +31,15 @@ class Triangle:
         return triangle_area
 
 
+class ValidationError(ValueError):
+    pass
+
+
 def validation(triangle):
     """Validation of input data
 
     :param triangle:
-    :return: valid data of False
+    :return: valid data of ValidationError
     """
     triangle = list(triangle.split(', '))
     name = triangle[0].lower()
@@ -47,7 +51,7 @@ def validation(triangle):
             side_c < (side_a + side_b):
         return name, side_a, side_b, side_c
     else:
-        return False
+        raise ValidationError
 
 
 def sorting(triangles_dict):
@@ -95,9 +99,15 @@ def main():
 
         try:
             name, side_a, side_b, side_c = validation(triangle)
-        except (ValueError, IndexError, TypeError):
-            print('Invalid data. Entry must contain 4 values. <side length> '
-                  'must contain only numbers.\n')
+        except ValidationError:
+            print('Nonexistent triangle. Sides must satisfy triangle '
+                  'inequality.\n')
+            continue
+        except IndexError:
+            print('Invalid range. Entry must contain 4 values.\n')
+            continue
+        except ValueError:
+            print('Invalid data. <side length> must contain only numbers.\n')
             continue
 
         triangle = Triangle(name, side_a, side_b, side_c)
