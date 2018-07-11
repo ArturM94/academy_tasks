@@ -3,25 +3,31 @@ from elementary_tasks.do_continue import do_continue
 
 class Envelope:
     def __init__(self, side_a, side_b, side_c, side_d):
-        # От пользователя принимаются параметры конвертов,
-        # вызывается функция определения вхождения конверта
+        """Initialisation method
+
+        :param side_a: -- Side a for first envelope
+        :param side_b: -- Side b for first envelope
+        :param side_c: -- Side c for second envelope
+        :param side_d: -- Side d for second envelope
+        """
         self.side_a = side_a
         self.side_b = side_b
         self.side_c = side_c
         self.side_d = side_d
 
-        instance_id = id(Envelope)
-        print(f'Instance id: {instance_id}\n')
-
     def envelope_entry(self):
-        # Сравниваются стороны конвертов,
-        # вызывается функция проверки результата
+        """Compares envelopes
+
+        Compares sides of two envelopes in pairs
+
+        :return: -- String result of comparision
+        """
         if (self.side_a > self.side_c) and (self.side_b > self.side_d):
-            print('The second envelope can be nested in the first.\n')
+            return 'The second envelope can be nested in the first.\n'
         elif (self.side_a < self.side_c) and (self.side_b < self.side_d):
-            print('The first envelope can be nested in the second.\n')
+            return 'The first envelope can be nested in the second.\n'
         else:
-            print('None of the envelopes can be nested in another.\n')
+            return 'None of the envelopes can be nested in another.\n'
 
 
 def main():
@@ -40,7 +46,8 @@ def main():
                       'than zero.\n')
                 continue
             envelope = Envelope(side_a, side_b, side_c, side_d)
-            envelope.envelope_entry()
+            entry_result = envelope.envelope_entry()
+            print(entry_result)
             answer = str(input('Do you want to continue? [y / yes]\n'))
             is_continue = do_continue(answer)
 
