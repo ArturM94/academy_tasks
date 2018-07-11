@@ -15,22 +15,22 @@ class TestFibonacci(TestCase):
         print('Tear down for [' + self.shortDescription() + ']\n')
 
     def test_fibonacci_for_0(self):
-        """Fibonacci function test"""
+        """Fibonacci staticmethod test"""
         result = FibonacciRange.fibonacci(0)
         self.assertEqual(result, 0)
 
     def test_fibonacci_for_1(self):
-        """Fibonacci function test"""
+        """Fibonacci staticmethod test"""
         result = FibonacciRange.fibonacci(1)
         self.assertEqual(result, 1)
 
     def test_fibonacci_for_2(self):
-        """Fibonacci function test"""
+        """Fibonacci staticmethod test"""
         result = FibonacciRange.fibonacci(2)
         self.assertEqual(result, 1)
 
     def test_fibonacci_for_8(self):
-        """Fibonacci function test"""
+        """Fibonacci staticmethod test"""
         result = FibonacciRange.fibonacci(8)
         self.assertEqual(result, 21)
 

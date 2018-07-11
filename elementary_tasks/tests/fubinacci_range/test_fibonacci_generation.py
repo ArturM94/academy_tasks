@@ -15,13 +15,13 @@ class TestFibonacciGeneration(TestCase):
         print('Tear down for [' + self.shortDescription() + ']\n')
 
     def test_fibonacci_generation_from_1_to_5(self):
-        """Fibonacci Generation function test"""
+        """Fibonacci Generation method test"""
         fr = FibonacciRange(0, 5)
         result = fr.fibonacci_generation()
         self.assertEqual(result, [0, 1, 1, 2, 3, 5])
 
     def test_fibonacci_generation_from_6_to_11(self):
-        """Fibonacci Generation function test"""
+        """Fibonacci Generation method test"""
         fr = FibonacciRange(6, 11)
         result = fr.fibonacci_generation()
         self.assertEqual(result, [8, 13, 21, 34, 55, 89])
