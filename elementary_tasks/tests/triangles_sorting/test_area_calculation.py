@@ -20,18 +20,6 @@ class TestAreaCalculation(TestCase):
         result = triangle.area_calculation()
         self.assertEqual(result, {'triangle': 7.27})
 
-    def test_area_calculation_for_int_values(self):
-        """Area Calculation method test"""
-        triangle = Triangle('triangle', 3.7, 4.2, 6.5)
-        result = triangle.area_calculation()
-        self.assertEqual(result, {'triangle': 7.27})
-
-    def test_area_calculation_for_mixed_values(self):
-        """Area Calculation method test"""
-        triangle = Triangle('triangle', 3.7, 4.2, 6.5)
-        result = triangle.area_calculation()
-        self.assertEqual(result, {'triangle': 7.27})
-
 
 if __name__ == '__main__':
     TestAreaCalculation()
