@@ -4,7 +4,7 @@ from elementary_tasks.do_continue import do_continue
 
 
 class Triangle:
-    def __init__(self, name, side_a, side_b, side_c):
+    def __init__(self, name, side_a, side_b, side_c, area=None):
         """Initialisation method
 
         :param name: -- Name of triangle
@@ -16,40 +16,42 @@ class Triangle:
         self.side_a = side_a
         self.side_b = side_b
         self.side_c = side_c
+        self.area = area
 
     def area_calculation(self):
         """Calculating the area of triangle
 
         Method returns the area by Heron's formula
 
-        :return: triangle_area
+        :return: triangle_area -- Area of triangle
         """
         sp = (self.side_a + self.side_b + self.side_c) / 2.0  # semi perimeter
-        area = round(sqrt(sp * (sp - self.side_a) * (sp - self.side_b) *
+        self.area = round(sqrt(sp * (sp - self.side_a) * (sp - self.side_b) *
                           (sp - self.side_c)), 2)
-        triangle_area = {self.name: area}
+        triangle_area = {self.name: self.area}
         return triangle_area
 
 
 class ValidationError(ValueError):
+    """Exception for nonexistent triangle"""
     pass
 
 
-def validation(triangle):
+def validation(triangle_data):
     """Validation of input data
 
-    :param triangle:
-    :return: valid data of ValidationError
+    :param triangle_data: --- String data of triangle
+    :return: -- Valid Triangle object or ValidationError
     """
-    triangle = list(triangle.split(', '))
-    name = triangle[0].lower()
-    side_a = float(triangle[1])
-    side_b = float(triangle[2])
-    side_c = float(triangle[3])
+    triangle_data = list(triangle_data.split(', '))
+    name = triangle_data[0].lower()
+    side_a = float(triangle_data[1])
+    side_b = float(triangle_data[2])
+    side_c = float(triangle_data[3])
 
     if side_a < (side_b + side_c) and side_b < (side_a + side_c) and \
             side_c < (side_a + side_b):
-        return name, side_a, side_b, side_c
+        return Triangle(name, side_a, side_b, side_c)
     else:
         raise ValidationError
 
@@ -85,10 +87,9 @@ def main():
     is_continue = True
 
     while is_continue:
-        triangle = input('Enter triangle data:\n')
-        # The instruction for using the program is called
-        # if 'triangle' have no parameters
-        if not triangle:
+        triangle_data = input('Enter triangle data:\n')
+        # The instruction for using the program for empty input
+        if not triangle_data:
             print('1. Enter triangle data in format: <name>, '
                   '<side length>, <side length>, <side length>.\n'
                   '2. Data must satisfy next conditions:\n'
@@ -98,7 +99,8 @@ def main():
             continue
 
         try:
-            name, side_a, side_b, side_c = validation(triangle)
+            # Create triangle object
+            triangle = validation(triangle_data)
         except ValidationError:
             print('Nonexistent triangle. Sides must satisfy triangle '
                   'inequality.\n')
@@ -110,7 +112,7 @@ def main():
             print('Invalid data. <side length> must contain only numbers.\n')
             continue
 
-        triangle = Triangle(name, side_a, side_b, side_c)
+        print(triangle.area)
         triangle_area = triangle.area_calculation()
         triangles_dict.update(triangle_area)
         answer = str(input('Do you want to continue? [y / yes]\n'))
