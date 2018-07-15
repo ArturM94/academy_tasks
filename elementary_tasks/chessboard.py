@@ -1,4 +1,4 @@
-from elementary_tasks.do_continue import do_continue
+from elementary_tasks import do_continue
 
 
 class ChessBoard:
