@@ -42,12 +42,17 @@ def petersburg_counter(f):
     return count_petersburg
 
 
-# C:\Users\Artur\Desktop\tickets.txt
-file_dir = input()
-with open(fr'{file_dir}', 'r') as file:
-    mc = moscow_counter(file)
-    print(f'Moscow lucky tickets: {mc}')
+def main():
+    # C:\Users\Artur\Desktop\tickets.txt
+    file_dir = input()
+    with open(fr'{file_dir}', 'r') as file:
+        mc = moscow_counter(file)
+        print(f'Moscow lucky tickets: {mc}')
 
-with open(fr'{file_dir}', 'r') as file:
-    pc = petersburg_counter(file)
-    print(f'Petersburg lucky tickets: {pc}')
+    with open(fr'{file_dir}', 'r') as file:
+        pc = petersburg_counter(file)
+        print(f'Petersburg lucky tickets: {pc}')
+
+
+if __name__ == '__main__':
+    main()
