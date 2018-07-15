@@ -10,7 +10,8 @@
 
 from .chessboard import ChessBoard
 from .envelopes_analysis import Envelope
-from .triangles_sorting import Triangle
+from .triangles_sorting import (Triangle, ValidationError,
+                                validation, sorting, print_out_data)
 from .file_parser import read_file, replace_line
 from .number_to_word import WordNumber
 from .lucky_tickets import moscow_counter, petersburg_counter
