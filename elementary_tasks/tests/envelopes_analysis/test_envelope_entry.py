@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from elementary_tasks.envelopes_analysis import Envelope
+from elementary_tasks import Envelope
 
 
 class TestEnvelopeEntry(TestCase):

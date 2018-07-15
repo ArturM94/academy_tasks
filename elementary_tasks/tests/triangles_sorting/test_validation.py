@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from elementary_tasks.triangles_sorting import validation
-from elementary_tasks.triangles_sorting import ValidationError
+from elementary_tasks import validation
+from elementary_tasks import ValidationError
 
 
 class TestValidation(TestCase):

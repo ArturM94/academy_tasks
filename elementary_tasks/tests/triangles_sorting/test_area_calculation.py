@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from elementary_tasks.triangles_sorting import Triangle
+from elementary_tasks import Triangle
 
 
 class TestAreaCalculation(TestCase):

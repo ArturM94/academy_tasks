@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from elementary_tasks.chessboard import ChessBoard
+from elementary_tasks import ChessBoard
 
 
 class TestChessboard(TestCase):

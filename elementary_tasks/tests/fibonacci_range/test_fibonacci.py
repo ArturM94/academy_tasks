@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from elementary_tasks.fibonacci_range import FibonacciRange
+from elementary_tasks import FibonacciRange
 
 
 class TestFibonacci(TestCase):
