@@ -1,1 +1,1 @@
-from .test_do_continue import DoContinueTest
+from .test_do_continue import TestDoContinue
