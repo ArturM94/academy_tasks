@@ -4,18 +4,21 @@ from elementary_tasks.do_continue import do_continue
 
 
 class Triangle:
-    def __init__(self, name, side_a, side_b, side_c, area=None):
+    def __init__(self, name, side_a, side_b, side_c, semi_perimeter=None,
+                 area=None):
         """Initialisation method
 
         :param name: -- Name of triangle
         :param side_a: -- Side a of triangle
         :param side_b: -- Side b of triangle
+        :param semi_perimeter: -- Semi perimeter of triangle
         :param side_c: -- Side c of triangle
         """
         self.name = name
         self.side_a = side_a
         self.side_b = side_b
         self.side_c = side_c
+        self.sp = semi_perimeter
         self.area = area
 
     def area_calculation(self):
@@ -25,9 +28,10 @@ class Triangle:
 
         :return: triangle_area -- Area of triangle
         """
-        sp = (self.side_a + self.side_b + self.side_c) / 2.0  # semi perimeter
-        self.area = round(sqrt(sp * (sp - self.side_a) * (sp - self.side_b) *
-                          (sp - self.side_c)), 2)
+        self.sp = (self.side_a + self.side_b + self.side_c) / 2.0
+        self.area = round(sqrt(self.sp * (self.sp - self.side_a) *
+                               (self.sp - self.side_b) *
+                               (self.sp - self.side_c)), 2)
         triangle_area = {self.name: self.area}
         return triangle_area
 
@@ -76,7 +80,6 @@ def print_out_data(sorted_dict):
     :param sorted_dict: -- Sorted triangles
     :return: -- Strings with triangle and its area
     """
-    # Выводит данные в консоль
     print('============= Triangles list: ===============')
     for i, key in enumerate(sorted_dict, 1):
         print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm²')
@@ -112,7 +115,6 @@ def main():
             print('Invalid data. <side length> must contain only numbers.\n')
             continue
 
-        print(triangle.area)
         triangle_area = triangle.area_calculation()
         triangles_dict.update(triangle_area)
         answer = str(input('Do you want to continue? [y / yes]\n'))
