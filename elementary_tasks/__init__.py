@@ -15,6 +15,6 @@ from .triangles_sorting import (Triangle, ValidationError,
 from .file_parser import read_file, replace_line
 from .number_to_word import WordNumber
 from .lucky_tickets import moscow_counter, petersburg_counter
-from .numerical_sequence import SequenceOfNaturalNumbers, output_generation
+from .numerical_sequence import SequenceOfNaturalNumbers
 from .fibonacci_range import FibonacciRange
 from .do_continue import do_continue
