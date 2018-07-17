@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from elementary_tasks import sorting
+from elementary_tasks import Triangle
 
 
 class TestSorting(TestCase):
@@ -9,6 +10,9 @@ class TestSorting(TestCase):
         """Set up for test"""
         print('\nSet up for [' + self.shortDescription() + ']')
         print(self)
+        self.triangle1 = Triangle('1', 3.7, 4.2, 6.5, 7.2, 7.27)
+        self.triangle2 = Triangle('2', 2.0, 3.0, 4.0, 4.5, 2.9)
+        self.triangle3 = Triangle('3', 3.7, 5.0, 6.0, 7.35, 9.23)
 
     def tearDown(self):
         """Tear down for test"""
@@ -16,13 +20,14 @@ class TestSorting(TestCase):
 
     def test_sorting_for_float_areas(self):
         """Sorting function test"""
-        unsorted_triangles = {'triangle 1': 7.27,
-                              'triangle 2': 2.9,
-                              'triangle 3': 8.74}
+
+        unsorted_triangles = [self.triangle1,
+                              self.triangle2,
+                              self.triangle3]
         result = sorting(unsorted_triangles)
-        self.assertEqual(result, {'triangle 3': 8.74,
-                                  'triangle 1': 7.27,
-                                  'triangle 2': 2.9})
+        self.assertEqual(result, [self.triangle3,
+                                  self.triangle1,
+                                  self.triangle2])
 
 
 if __name__ == '__main__':

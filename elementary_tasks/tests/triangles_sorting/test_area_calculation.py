@@ -18,7 +18,7 @@ class TestAreaCalculation(TestCase):
         """Area Calculation method test"""
         triangle = Triangle('triangle', 3.7, 4.2, 6.5)
         result = triangle.area_calculation()
-        self.assertEqual(result, {'triangle': 7.27})
+        self.assertEqual(result, 7.27)
 
 
 if __name__ == '__main__':
