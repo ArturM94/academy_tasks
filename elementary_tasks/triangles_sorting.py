@@ -11,8 +11,9 @@ class Triangle:
         :param name: -- Name of triangle
         :param side_a: -- Side a of triangle
         :param side_b: -- Side b of triangle
-        :param semi_perimeter: -- Semi perimeter of triangle
         :param side_c: -- Side c of triangle
+        :param semi_perimeter: -- Semi perimeter of triangle
+        :param area: -- Area of triangle
         """
         self.name = name
         self.side_a = side_a
@@ -21,19 +22,27 @@ class Triangle:
         self.sp = semi_perimeter
         self.area = area
 
+    def __str__(self):
+        """str method
+
+        Redefines str() function for triangles output
+
+        :return: -- String in specified format
+        """
+        return f'[Triangle {self.name}]: {self.area} cm²'
+
     def area_calculation(self):
         """Calculating the area of triangle
 
         Method returns the area by Heron's formula
 
-        :return: triangle_area -- Area of triangle
+        :return: area -- Area of triangle
         """
         self.sp = (self.side_a + self.side_b + self.side_c) / 2.0
         self.area = round(sqrt(self.sp * (self.sp - self.side_a) *
                                (self.sp - self.side_b) *
                                (self.sp - self.side_c)), 2)
-        triangle_area = {self.name: self.area}
-        return triangle_area
+        return self.area
 
 
 class ValidationError(ValueError):
@@ -60,33 +69,20 @@ def validation(triangle_data):
         raise ValidationError
 
 
-def sorting(triangles_dict):
+def sorting(triangles_list):
     """Sorts the dictionary
 
     Sorts by value in order of decreasing area
 
-    :param triangles_dict: -- Collection of triangles
+    :param triangles_list: -- Collection of triangles
     :return: triangles_dict -- Sorted triangles
     """
-    triangles_dict = sorted(triangles_dict.items(), key=lambda item: item[1],
-                            reverse=True)
-    triangles_dict = dict(triangles_dict)
-    return triangles_dict
-
-
-def print_out_data(sorted_dict):
-    """Prints data in console
-
-    :param sorted_dict: -- Sorted triangles
-    :return: -- Strings with triangle and its area
-    """
-    print('============= Triangles list: ===============')
-    for i, key in enumerate(sorted_dict, 1):
-        print(f'{i}. [Triangle {key}]: {sorted_dict[key]} cm²')
+    sorted_list = sorted(triangles_list, key=lambda x: x.area, reverse=True)
+    return sorted_list
 
 
 def main():
-    triangles_dict = dict()
+    triangles_list = []
     is_continue = True
 
     while is_continue:
@@ -115,13 +111,16 @@ def main():
             print('Invalid data. <side length> must contain only numbers.\n')
             continue
 
-        triangle_area = triangle.area_calculation()
-        triangles_dict.update(triangle_area)
+        triangle.area = triangle.area_calculation()
+        triangles_list.append(triangle)
         answer = str(input('Do you want to continue? [y / yes]\n'))
         is_continue = do_continue(answer)
 
-    sorted_dict = sorting(triangles_dict)
-    print_out_data(sorted_dict)
+    sorted_list = sorting(triangles_list)
+    print('============= Triangles list: ===============')
+    for i, triangle in enumerate(sorted_list, 1):
+        print(i, end='. ')
+        print(triangle)
 
 
 if __name__ == '__main__':
