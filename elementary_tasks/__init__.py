@@ -9,7 +9,7 @@
 #            'do_continue']
 
 from .chessboard import ChessBoard
-from .envelopes_analysis import Envelope
+from .envelopes_analysis import Envelope, envelope_entry
 from .triangles_sorting import Triangle, ValidationError, validation, sorting
 from .file_parser import read_file, replace_line
 from .number_to_word import WordNumber
