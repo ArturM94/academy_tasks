@@ -44,7 +44,7 @@ def petersburg_counter(f):
 
 def main():
     # C:\Users\Artur\Desktop\tickets.txt
-    file_dir = input()
+    file_dir = input('Input directory:\n')
     with open(fr'{file_dir}', 'r') as file:
         mc = moscow_counter(file)
         print(f'Moscow lucky tickets: {mc}')
