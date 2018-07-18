@@ -1,3 +1,6 @@
+from elementary_tasks import do_continue
+
+
 class WordNumber:
     def __init__(self, digit_number):
         self.digit_number = digit_number
@@ -73,7 +76,7 @@ class WordNumber:
         # В теле ветвления определяется ключ. Ключом является само значение
         # в списке с соответсвующим индексом. С помощью полученного ключа
         # из соответсвующего словаря извлекается прописной вариант числа.
-        list_number = list(self.n)
+        list_number = list(self.digit_number)
         length = len(list_number)
         # Для числа 0
         if length == 1 and int(list_number[0]) == 0:
@@ -157,7 +160,9 @@ class WordNumber:
 
 
 def main():
-    while True:
+    is_continue = True
+
+    while is_continue:
         try:
             digit_number = input('Enter the number:\n')
             if not digit_number:
@@ -170,6 +175,9 @@ def main():
             print(word)
         except ValueError:
             print('Entry must contain only positive number from 0 to 999.\n')
+
+        answer = str(input('Do you want to continue? [y / yes]\n'))
+        is_continue = do_continue(answer)
 
 
 if __name__ == '__main__':
