@@ -4,23 +4,38 @@ from elementary_tasks.do_continue import do_continue
 
 
 class Triangle:
-    def __init__(self, name, side_a, side_b, side_c, semi_perimeter=None,
-                 area=None):
+    def __init__(self, name, side_a, side_b, side_c):
         """Initialisation method
 
         :param name: -- Name of triangle
         :param side_a: -- Side a of triangle
         :param side_b: -- Side b of triangle
         :param side_c: -- Side c of triangle
-        :param semi_perimeter: -- Semi perimeter of triangle
-        :param area: -- Area of triangle
         """
         self.name = name
         self.side_a = side_a
         self.side_b = side_b
         self.side_c = side_c
-        self.sp = semi_perimeter
-        self.area = area
+
+    @property
+    def area(self):
+        """Area
+
+        Calls method of triangle's area calculation
+
+        :return: -- Area of triangle
+        """
+        return self.area_calculation()
+
+    @property
+    def semi_perimeter(self):
+        """Semi perimeter
+
+        Calculates semi perimeter of triangle
+
+        :return: -- Semi perimeter of triangle
+        """
+        return (self.side_a + self.side_b + self.side_c) / 2.0
 
     def __str__(self):
         """str method
@@ -36,13 +51,12 @@ class Triangle:
 
         Method returns the area by Heron's formula
 
-        :return: area -- Area of triangle
+        :return: -- Area of triangle
         """
-        self.sp = (self.side_a + self.side_b + self.side_c) / 2.0
-        self.area = round(sqrt(self.sp * (self.sp - self.side_a) *
-                               (self.sp - self.side_b) *
-                               (self.sp - self.side_c)), 2)
-        return self.area
+        return round(sqrt(self.semi_perimeter *
+                          (self.semi_perimeter - self.side_a) *
+                          (self.semi_perimeter - self.side_b) *
+                          (self.semi_perimeter - self.side_c)), 2)
 
 
 class ValidationError(ValueError):
@@ -54,7 +68,7 @@ def validation(triangle_data):
     """Validation of input data
 
     :param triangle_data: --- String data of triangle
-    :return: -- Valid Triangle object or ValidationError
+    :return: -- Valid Triangle instance or ValidationError
     """
     triangle_data = list(triangle_data.split(', '))
     name = triangle_data[0].lower()
@@ -111,14 +125,13 @@ def main():
             print('Invalid data. <side length> must contain only numbers.\n')
             continue
 
-        triangle.area = triangle.area_calculation()
         triangles_list.append(triangle)
         answer = str(input('Do you want to continue? [y / yes]\n'))
         is_continue = do_continue(answer)
 
-    sorted_list = sorting(triangles_list)
+    sorted_triangles_list = sorting(triangles_list)
     print('============= Triangles list: ===============')
-    for i, triangle in enumerate(sorted_list, 1):
+    for i, triangle in enumerate(sorted_triangles_list, 1):
         print(i, end='. ')
         print(triangle)
 
