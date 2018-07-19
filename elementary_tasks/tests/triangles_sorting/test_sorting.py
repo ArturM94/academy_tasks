@@ -10,9 +10,9 @@ class TestSorting(TestCase):
         """Set up for test"""
         print('\nSet up for [' + self.shortDescription() + ']')
         print(self)
-        self.triangle1 = Triangle('1', 3.7, 4.2, 6.5, 7.2, 7.27)
-        self.triangle2 = Triangle('2', 2.0, 3.0, 4.0, 4.5, 2.9)
-        self.triangle3 = Triangle('3', 3.7, 5.0, 6.0, 7.35, 9.23)
+        self.triangle1 = Triangle('1', 3.7, 4.2, 6.5)
+        self.triangle2 = Triangle('2', 2.0, 3.0, 4.0)
+        self.triangle3 = Triangle('3', 3.7, 5.0, 6.0)
 
     def tearDown(self):
         """Tear down for test"""
