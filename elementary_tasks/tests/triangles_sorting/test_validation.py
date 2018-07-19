@@ -22,6 +22,30 @@ class TestValidation(TestCase):
         result = validation(triangle_data)
         self.assertIsInstance(result, Triangle)
 
+    def test_validation_instance_for_float_sides(self):
+        """Validation function test"""
+        triangle_data = 'triangle, 3.7, 4.2, 6.5'
+        result = validation(triangle_data)
+        self.assertIsInstance(result, Triangle)
+
+    def test_validation_instance_for_mixed_sides(self):
+        """Validation function test"""
+        triangle_data = 'triangle, 3.7, 4, 6'
+        result = validation(triangle_data)
+        self.assertIsInstance(result, Triangle)
+
+    def test_validation_instance_for_single_name(self):
+        """Validation function test"""
+        triangle_data = 'singlename, 3.7, 4.2, 6.5'
+        result = validation(triangle_data)
+        self.assertIsInstance(result, Triangle)
+
+    def test_validation_instance_for_double_name(self):
+        """Validation function test"""
+        triangle_data = 'double name, 3.7, 4.2, 6.5'
+        result = validation(triangle_data)
+        self.assertIsInstance(result, Triangle)
+
     def test_validation_for_each_value_of_int_sides(self):
         """Validation function test"""
         triangle_data = 'triangle, 3, 4, 5'
@@ -29,12 +53,6 @@ class TestValidation(TestCase):
         self.assertEqual(result.side_a, 3.0)
         self.assertEqual(result.side_b, 4.0)
         self.assertEqual(result.side_c, 5.0)
-
-    def test_validation_instance_for_float_sides(self):
-        """Validation function test"""
-        triangle_data = 'triangle, 3.7, 4.2, 6.5'
-        result = validation(triangle_data)
-        self.assertIsInstance(result, Triangle)
 
     def test_validation_for_each_value_of_float_sides(self):
         """Validation function test"""
@@ -44,12 +62,6 @@ class TestValidation(TestCase):
         self.assertEqual(result.side_b, 4.2)
         self.assertEqual(result.side_c, 6.5)
 
-    def test_validation_instance_for_mixed_sides(self):
-        """Validation function test"""
-        triangle_data = 'triangle, 3.7, 4, 6'
-        result = validation(triangle_data)
-        self.assertIsInstance(result, Triangle)
-
     def test_validation_for_each_value_of_mixed_sides(self):
         """Validation function test"""
         triangle_data = 'triangle, 3.7, 4, 6'
@@ -58,23 +70,11 @@ class TestValidation(TestCase):
         self.assertEqual(result.side_b, 4.0)
         self.assertEqual(result.side_c, 6.0)
 
-    def test_validation_instance_for_single_name(self):
-        """Validation function test"""
-        triangle_data = 'singlename, 3.7, 4.2, 6.5'
-        result = validation(triangle_data)
-        self.assertIsInstance(result, Triangle)
-
     def test_validation_for_single_name(self):
         """Validation function test"""
         triangle_data = 'singlename, 3.7, 4.2, 6.5'
         result = validation(triangle_data)
         self.assertEqual(result.name, 'singlename')
-
-    def test_validation_instance_for_double_name(self):
-        """Validation function test"""
-        triangle_data = 'double name, 3.7, 4.2, 6.5'
-        result = validation(triangle_data)
-        self.assertIsInstance(result, Triangle)
 
     def test_validation_for_double_name(self):
         """Validation function test"""
