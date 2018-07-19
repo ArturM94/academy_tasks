@@ -2,23 +2,31 @@ from elementary_tasks.do_continue import do_continue
 
 
 class SequenceOfNaturalNumbers:
-    def __init__(self, limit_number, sequence=None):
+    def __init__(self, limit_number):
         """Initialisation method
 
-        :param limit_number: -- Entered natural number
+        :param limit_number: -- Limit for squaring of natural number
         """
         self.limit_number = limit_number
-        self.sequence = sequence
+
+    @property
+    def sequence(self):
+        """Sequence
+
+        Calls method of sequence generation
+
+        :return: -- Sequence of natural number
+        """
+        return self.sequence_generation()
 
     def __str__(self):
         """str method
 
         Redefines str() function for sequence output
 
-        :return: sequence -- Sequence separated by commas
+        :return: -- Sequence separated by commas
         """
-        self.sequence = [str(_) for _ in self.sequence]
-        return ', '.join(self.sequence)
+        return ', '.join([str(_) for _ in self.sequence])
 
     def sequence_generation(self):
         """Sequence generator
@@ -28,14 +36,14 @@ class SequenceOfNaturalNumbers:
 
         :return: sequence -- Sequence of natural numbers
         """
-        self.sequence = []
+        sequence = []
         natural_number = 1  # First natural number
 
         while natural_number ** 2 < self.limit_number:
-            self.sequence.append(natural_number)
+            sequence.append(natural_number)
             natural_number += 1
 
-        return self.sequence
+        return sequence
 
 
 def main():
@@ -44,11 +52,13 @@ def main():
     while is_continue:
         try:
             limit_number = int(input('Enter limit number for sequence:\n'))
+            if limit_number < 2:
+                raise ValueError
         except ValueError:
-            print('Invalid value. Entry must contain only integer number.\n')
+            print('Invalid value. Entry must contain only positive integer '
+                  'number grater than 1.\n')
             continue
         sequence_instance = SequenceOfNaturalNumbers(limit_number)
-        sequence_instance.sequence = sequence_instance.sequence_generation()
         print(sequence_instance)
         answer = str(input('Do you want to continue? [y / yes]\n'))
         is_continue = do_continue(answer)
